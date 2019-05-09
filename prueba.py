@@ -19,7 +19,7 @@ def listar_contactos(contactos):
         for i,n in k.items(): 
             print("{}: {}".format(i,n))
         contador = contador +1
-agregar_contacto("fabricio","juarez","123")
+#agregar_contacto("fabricio","juarez","123")
 
 
 def eliminar_contactos (nombre):
@@ -34,10 +34,6 @@ def eliminar_contactos (nombre):
                 contactos.remove(eliminar)
         conta = conta +1
     
-
-
-
-
 
 """Fase 2"""
 
@@ -54,30 +50,39 @@ def ChequeoArchivoExistenteConImpresion ():
         with open("InitialContactList.txt") as f:
             for linea in f:
                 (key,val) = linea.split()
-                contactos[int(key)] = val
-        print(contactos)
+                diccionario[int(key)] = val
+        print(diccionario)
         
         
     else:
-        print("No existe el archivo ")
+        print("No existe el archivo en el que desea trabajar ")
 
-gt= "si"
-while gt =="si":
-    opcion = int(input("seleccione opcion(1=agregar,2=listar,3=eliminar"))
-    if opcion == 1:
-        nombre = input("nombre ")
-        apellido = input("apellido ")
-        numero =input("numero ")
-        agregar_contacto(nombre,apellido,numero)
-    if opcion == 2:
-        listar_contactos(contactos)
-    if opcion == 3:
-        nombre = input("nombre ")
-        
-        eliminar_contactos (nombre)
-        
-    gt = input("otra accion?")
 
+
+def MenuPrincipal ():
+    gt= "si"
+    opcion = int(input("seleccione opcion\n(1)agregar\n(2)Listar contactos\n(3)eliminar Contacto\n"))
+    
+    if gt =="si":
+        
+        if opcion == 1:
+            nombre = input("nombre ")
+            apellido = input("apellido ")
+            numero =input("numero ")
+            agregar_contacto(nombre,apellido,numero)
+        if opcion == 2:
+            listar_contactos(contactos)
+        if opcion == 3:
+            nombre = input("nombre ")
+            
+            eliminar_contactos (nombre)
+            
+        gt = input("Desea agregar,listar o elimnar un contacto?\n")
+    else:
+        print("Saliendo...")
+
+MenuPrincipal()
+ChequeoArchivoExistenteConImpresion()
 
 
 
