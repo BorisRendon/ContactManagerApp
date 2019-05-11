@@ -70,36 +70,64 @@ def call_id (contactos,id):
         contador =contador - 1
 
 #------------------------------------------------------menu temporal--------------------------------------------------
-# gt= "si"
-# print("")
-# print("--------------------------------menu principal contact manager--------------------------------------------")
-# print("")
-# print("1.  agregar un contacto")
-# print("2.  listar contactos")
-# print("3.  eliminar un contacto")
-# print("4.  llamar un contacto")
-# print("")
-# while gt =="si":
-#     opcion = int(input("ingrese numero de opcion "))
-#     print("")
-#     if opcion == 1:
-#         nombre = input("Nombre:  ")
-#         apellido = input("Apellido: ")
-#         numero =input("Numero ")
-#         agregar_contacto(nombre,apellido,numero)
-#     if opcion == 2:
-#         listar_contactos(contactos)
-#     if opcion == 3:
-#         nombre = input("Nombre ")   
-#         eliminar_contactos (nombre)
-#     if opcion == 4:
-#         id= int(input("Ingrese id a llamar "))
-#         print("")
-#         call_id(contactos,id)
-#     print("")
-#     gt = input("Desea realizar otra accion? ")
+menup = "si"
+while menup == "si":
+        print("")
+        print("--------------------------------menu principal contact manager--------------------------------------------")
+        print("")
+        print("1. ajustes de contactos")
+        print("2. comunicarse con algun contacto")
+        print("10. exit ")
+        print("")
+        opcion_menu_prin = int(input("ingrese numero de opcion "))
+        if opcion_menu_prin == 1 :               
+                menuaj = "si"
+                while menuaj =="si":
+                        print("")
+                        print("--------------------------------Ajustes de contactos--------------------------------------------")
+                        print("")
+                        print("1. agregar contactos")
+                        print("2. listar contactos")
+                        print("3. eliminar contactos")
+                        print("")
+                        opcion_ajustes = int(input("ingrese numero de opcion "))
+                        print("")
+                        if opcion_ajustes == 1:
+                                nombre = input("Nombre:  ")
+                                apellido = input("Apellido: ")
+                                numero =input("Numero ")
+                                agregar_contacto(nombre,apellido,numero)
+                        if opcion_ajustes == 2:
+                                listar_contactos(contactos)
+                        if opcion_ajustes == 3:
+                                nombre = input("Nombre ")   
+                                eliminar_contactos (nombre)
+                        menuaj = input("Desea realizar otra accion? ")
+        if opcion_menu_prin == 2 :
+                
+                menucont = "si"
+                while menucont == "si":
+                        print("")
+                        print("--------------------------------Ajustes de contactos--------------------------------------------")
+                        print("")
+                        print("1. llamar contacto ")
+                        print("2. mandar mensaje a contacto ")
+                        print("3. eliminar contactos")
+                        print("")
+                        opcion_cont = int(input("ingrese numero de opcion "))
+                        print("")
+                        if opcion_cont == 1:
+                                id= int(input("Ingrese id a llamar "))
+                                print("")
+                                call_id(contactos,id)
+                        print("")
+                        menucont = input("Desea realizar otra accion? ")
+        if opcion_menu_prin == 10 :
+                print("gracias por utilizar contact manager")
+                sys.exit()
+        
    
-ChequeoArchivoExistenteConImpresion ()
+
 
 
 
