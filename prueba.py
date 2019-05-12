@@ -30,10 +30,10 @@ def eliminar_contactos (nombre):
                 eliminar = contactos[conta]
                 contactos.remove(eliminar)
         conta = conta +1
+#------------------------------------------------------funcion chequeo de archivo con impresion--------------------------------------------------
 """Fase 2"""
 listavacia = []
 diccionario ={}
-#------------------------------------------------------funcion chequeo de archivo con impresion--------------------------------------------------
 def ChequeoArchivoExistenteConImpresion ():
     global contactos
     global listavacia
@@ -48,6 +48,7 @@ def ChequeoArchivoExistenteConImpresion ():
         print(contactos)       
     else:
         print("No existe el archivo ")
+"fase 3"      
 #------------------------------------------------------funcion agregar id a contactos--------------------------------------------------
 def contact_id (contactos):
     contador = 0 
@@ -68,7 +69,34 @@ def call_id (contactos,id):
         time.sleep(1)
         print("Espere en linea {} segundos restantes".format(contador))
         contador =contador - 1
-
+#------------------------------------------------------funcion mensaje de textos ids--------------------------------------------------
+def mensajes_ids(contactos,ids,mensaje):
+        id=contactos[ids]
+        id_per=id["nombre"]
+        id_num = id ["numero"]
+        print ("enviando mensaje a: {} ({})".format(id_per,id_num))
+        print ("mensaje: {}".format(mensaje))
+        print("")
+        print("enviando mensaje...")
+        time.sleep(2)
+#------------------------------------------------------funcion agregar a favoritos--------------------------------------------------
+lista_favoritos=[]
+def agregar_a_favo(contactos,ids):
+        nuevo = contactos[ids]
+        lista_favoritos.append(nuevo)
+        return
+        lista_favoritos
+#------------------------------------------------------funcion listar contactos favoritos--------------------------------------------------
+def listar_contactos_favoritos(lista_favoritos):   
+    contador=0
+    for k in (lista_favoritos):       
+        print(" ---------------------------")
+        print("| contacto favorito #{}     |".format(contador))
+        print(" ---------------------------")
+        for i,n in k.items(): 
+            print("{}: {}".format(i,n))
+        print ("contact id es {}".format(contador))
+        contador = contador +1
 #------------------------------------------------------menu temporal--------------------------------------------------
 menup = "si"
 while menup == "si":
@@ -104,14 +132,15 @@ while menup == "si":
                                 eliminar_contactos (nombre)
                         menuaj = input("Desea realizar otra accion? ")
         if opcion_menu_prin == 2 :
-                
                 menucont = "si"
                 while menucont == "si":
                         print("")
-                        print("--------------------------------Ajustes de contactos--------------------------------------------")
+                        print("--------------------------------Comunicarse con algun contacto--------------------------------------------")
                         print("")
                         print("1. llamar contacto ")
-                        
+                        print("2. mensaje a contacto")
+                        print("3. agregar contacto a favorito")
+                        print("4. listar contactos favoritos")
                         print("")
                         opcion_cont = int(input("ingrese numero de opcion "))
                         print("")
@@ -119,13 +148,35 @@ while menup == "si":
                                 id= int(input("Ingrese id a llamar "))
                                 print("")
                                 call_id(contactos,id)
-                        print("")
+                                print("")
+                        if opcion_cont == 2:
+                                ids= int(input("Ingrese id a mandar mensaje "))
+                                mensaje = input("ingrese mensaje: ")
+                                
+                                print("")
+                        if opcion_cont == 3:
+                                ids = int(input("ingrese id para agregar a favoritos"))
+                                agregar_a_favo(contactos,ids)
+                                print("")
+                                print("contacto agregado")
+                                time.sleep(1)
+                        
+                        
+                        
+                        if opcion_cont == 4:
+                                print("")
+                                listar_contactos_favoritos(lista_favoritos)
+                        
                         menucont = input("Desea realizar otra accion? ")
+                        
         if opcion_menu_prin == 10 :
-                print("gracias por utilizar contact manager")
+                print("cerrando contact manager")
+                time.sleep(2)
                 sys.exit()
-        
-   
+
+
+
+
 
 
 
