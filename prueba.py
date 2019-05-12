@@ -48,8 +48,9 @@ def ChequeoArchivoExistenteConImpresion ():
         print(contactos)       
     else:
         print("No existe el archivo ")
-"fase 3"      
+      
 #------------------------------------------------------funcion agregar id a contactos--------------------------------------------------
+"fase 3"
 def contact_id (contactos):
     contador = 0 
     contactos_cid={} 
@@ -123,7 +124,7 @@ while menup == "si":
                         if opcion_ajustes == 1:
                                 nombre = input("Nombre:  ")
                                 apellido = input("Apellido: ")
-                                numero =input("Numero ")
+                                numero =input("Numero: ")
                                 agregar_contacto(nombre,apellido,numero)
                         if opcion_ajustes == 2:
                                 listar_contactos(contactos)
@@ -152,6 +153,7 @@ while menup == "si":
                         if opcion_cont == 2:
                                 ids= int(input("Ingrese id a mandar mensaje "))
                                 mensaje = input("ingrese mensaje: ")
+                                mensajes_ids(contactos,ids,mensaje)
                                 
                                 print("")
                         if opcion_cont == 3:
