@@ -111,8 +111,7 @@ while menup == "si":
                         print("--------------------------------Ajustes de contactos--------------------------------------------")
                         print("")
                         print("1. llamar contacto ")
-                        print("2. mandar mensaje a contacto ")
-                        print("3. eliminar contactos")
+                        
                         print("")
                         opcion_cont = int(input("ingrese numero de opcion "))
                         print("")
