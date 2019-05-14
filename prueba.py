@@ -2,6 +2,29 @@ import os.path
 
 
 
+def MenuPrincipal ():
+    gt= "si"
+    opcion = int(input("seleccione opcion\n(1)agregar\n(2)Listar contactos\n(3)eliminar Contacto\n"))
+    
+    if gt =="si":
+        
+        if opcion == 1:
+            nombre = input("nombre ")
+            apellido = input("apellido ")
+            numero =input("numero ")
+            agregar_contacto(nombre,apellido,numero)
+        if opcion == 2:
+            listar_contactos(contactos)
+        if opcion == 3:
+            nombre = input("nombre ")
+            
+            eliminar_contactos (nombre)
+            
+        gt = input("Desea agregar,listar o elimnar un contacto?\n")
+    else:
+        print("Saliendo...")
+
+
 """""fase 1"""
 contactos=[]
 
@@ -40,7 +63,7 @@ def eliminar_contactos (nombre):
 listavacia = []
 diccionario ={}
 
-def ChequeoArchivoExistenteConImpresion ():
+def ChequeoArchivoExistenteConImpresion (nombre,apellido,numero):
     global contactos
     global listavacia
     global diccionario
@@ -59,27 +82,6 @@ def ChequeoArchivoExistenteConImpresion ():
 
 
 
-def MenuPrincipal ():
-    gt= "si"
-    opcion = int(input("seleccione opcion\n(1)agregar\n(2)Listar contactos\n(3)eliminar Contacto\n"))
-    
-    if gt =="si":
-        
-        if opcion == 1:
-            nombre = input("nombre ")
-            apellido = input("apellido ")
-            numero =input("numero ")
-            agregar_contacto(nombre,apellido,numero)
-        if opcion == 2:
-            listar_contactos(contactos)
-        if opcion == 3:
-            nombre = input("nombre ")
-            
-            eliminar_contactos (nombre)
-            
-        gt = input("Desea agregar,listar o elimnar un contacto?\n")
-    else:
-        print("Saliendo...")
 
 MenuPrincipal()
 ChequeoArchivoExistenteConImpresion()

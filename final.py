@@ -5,6 +5,7 @@ def agregar_contacto(nombreNuevo,apellidoNuevo,numeroNuevo):
     contactos.append(new_contact)
     print (contactos)
 
+
 def listar_contactos(contactos):   
     contador=1
     for k in (contactos):       
@@ -14,7 +15,7 @@ def listar_contactos(contactos):
         for i,n in k.items(): 
             print("{}: {}".format(i,n))
         contador = contador +1
-listar_contactos(contactos)        
+
 def eliminar_contactos (nombre):
     nombre_lista= nombre.split(" ")
     nombre_cliente= nombre_lista[0]
@@ -27,6 +28,10 @@ def eliminar_contactos (nombre):
                 contactos.remove(eliminar)
         conta = conta +1
     print(contactos)
+
+listar_contactos(contactos)        
+
+
 
         
 

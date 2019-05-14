@@ -3,12 +3,14 @@ import os.path
 
 
 """""fase 1"""
-contactos=[{"nombre":"fabricio","apellido":"perez","numero":"44"},{"nombre":"andres","apellido":"alvarado","numero":"46"}]
+contactos=[{"nombre":"","apellido":"","numero":""},{"nombre":,"apellido":,"numero":"46"}]
 
 def agregar_contacto(nombreNuevo,apellidoNuevo,numeroNuevo):
     new_contact= {"nombre":nombreNuevo,"apellido":apellidoNuevo,"numero":numeroNuevo}
     contactos.append(new_contact)
     print (contactos)
+
+
 
 def listar_contactos(contactos):   
     contador=1
@@ -52,8 +54,8 @@ def ChequeoArchivoExistenteConImpresion ():
         with open("InitialContactList.txt") as f:
             for linea in f:
                 (key,val) = linea.split()
-                contactos[int(key)] = val
-        print(contactos)
+                diccionario[int(key)] = val
+        print(diccionario)
         
         
     else:
