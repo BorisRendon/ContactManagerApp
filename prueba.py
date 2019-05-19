@@ -1,29 +1,27 @@
 import os.path,time,sys,requests
 
-
 """""fase 1"""
-
 contactos=[]
-#fase 2
-
-
 #---------------------------------------------------funcion traer .txt--------------------------------------------------------------
-def agregar_txt(filename):
-        if(os.path.isfile(filename)):
-                with open(filename, 'r') as f:
-                        '''
-                        accion que realiza: agrega contactos de un archivo txt a la lista principal
-                        input: recibe el nombre del txt
-                        returns: nada '''
+def agregar_txt (path,documento):
+        directory = os.path.normpath(path)
+        for subdir, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith(documento):
+                    with open(os.path.join(subdir, file),'r') as f:
                         for line in f.readlines():
+                                                
+                            try:
+
                                 lista = line.split(",")
                                 
                                 new_contact= {"nombre":lista[0],"apellido":lista[1],"numero":lista[2]}
                                 contactos.append(new_contact)
-        else:
-                ("")
-                print("archivo no existe")
-                time.sleep(1)
+                            except:
+                                IndexError 
+                                print("")
+                                print ("[ERROR] al agregar la linea")
+agregar_txt("C:/Users/fabri/Documents/GitHub/ContactManagerApp","ejemplo.txt")     
 
 #------------------------------------------------------funcion agregar contactos--------------------------------------------------
 def agregar_contacto(nombreNuevo,apellidoNuevo,numeroNuevo):
@@ -149,7 +147,7 @@ def listar_contactos_favoritos(lista_favoritos):
         contador = contador +1
 opciones_principal = [1,2,3,4,10]
 #------------------------------------------------------menu-----------------------------------------------------------
-agregar_txt("ejemplo.txt")
+
 menup = "si"
 while menup == "si":
         print("")
@@ -190,8 +188,9 @@ while menup == "si":
                                 nombre = input("Nombre y apellido: ")   
                                 eliminar_contactos (contactos,nombre)
                         if opcion_ajustes == "4":
-                                filename = input("ingrese nombre de archivo: ")
-                                agregar_txt(filename)   
+                                path = input("ingrese path de archivo: ")
+                                documento = input("ingrese nombre de archivo")
+                                agregar_txt(path,documento)   
                         if opcion_ajustes == "10":
                                 menuaj= "salir"
         if opcion_menu_prin == "2" :
