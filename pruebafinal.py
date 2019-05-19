@@ -1,9 +1,30 @@
 import os.path,time,sys
+import request
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+import urllib.request
 
 """""fase 1"""
 
+#prueba fase 6
+
 contactos=[]
 #fase 2
+url = 'http://demo7862839.mockable.io/contacts?gid=100 '
+#params por el momento no srive de nada,no sé cuales deberaian de ser los parámetros
+params = {"name": "arg1",
+          "lastname": "arg2",
+          "Phone": "arg3"
+}
+querystring = urllib.parse.urlencode(params)
+url = url + "?" + querystring
+querystring = urllib.parse.urlencode(params)
+url = url + "?" + querystring
+with urllib.request.urlopen("http://demo7862839.mockable.io/contacts?gid=100") as response:
+    response_txt = response.read()
+    
+    print(response_txt)
+
 
 
 #---------------------------------------------------funcion traer .txt--------------------------------------------------------------
@@ -320,5 +341,7 @@ while menup == "si":
                         if opcion_help == "10":
                                 menu_help= "exit"                                       
         if opcion_menu_prin == "10" :
-                print("cerrando contact manager")
+                print("cerrando contact manager...")
+                
                 time.sleep(2)
+                sys.exit(0)
