@@ -179,10 +179,14 @@ while menup == "si":
                                 nombre = input("Nombre:  ")
                                 apellido = input("Apellido: ")
                                 numero =int(input("Numero: "))
-                                
-                                agregar_contacto(nombre,apellido,numero)
-                                print("contacto agregado")
-                                time.sleep(1)
+                                largonumero = len(numero)
+                                if largonumero == 8:
+                                        agregar_contacto(nombre,apellido,numero)
+                                        print("contacto agregado")
+                                        time.sleep(1)
+                                else:
+                                        print("numero debe ser de 8 digitos para que el contacto se guarde")
+                                        time.sleep(3)
                         if opcion_ajustes == "2":
                                 listar_contactos(contactos)
                         if opcion_ajustes == "3":
