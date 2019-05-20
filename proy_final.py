@@ -1,5 +1,13 @@
+import requests
 import os.path,time,sys,requests
 contactos=[]
+def get_contacts (url):
+        r = requests.get(url = url)
+        data = r.json()
+        for i in data:
+                contactos.append(i)
+
+
 #---------------------------------------------------funcion traer .txt--------------------------------------------------------------
 def agregar_txt (path,documento):
         '''
@@ -18,7 +26,7 @@ def agregar_txt (path,documento):
 
                                                                 lista = line.split(",")
                                                                 
-                                                                new_contact= {"nombre":lista[0],"apellido":lista[1],"numero":lista[2]}
+                                                                new_contact= {"FirstName":lista[0],"LastName":lista[1],"Phone":lista[2]}
                                                                 contactos.append(new_contact)
                                                         except:
                                                                 IndexError 
@@ -34,7 +42,7 @@ def agregar_contacto(nombreNuevo,apellidoNuevo,numeroNuevo):
     accion que realiza: agrega un contacto a la lista
     input: recibe el nombre el apellido  y un # de telefono de 8 digitos
     returns: nada '''
-    new_contact= {"nombre":nombreNuevo,"apellido":apellidoNuevo,"numero":numeroNuevo}
+    new_contact= {"FirstName":nombreNuevo,"LastName":apellidoNuevo,"Phone":numeroNuevo}
     contactos.append(new_contact)
 #------------------------------------------------------funcion listar contactos--------------------------------------------------
 def listar_contactos(contactos):
@@ -70,8 +78,8 @@ def eliminar_contactos (contactos,nombre):
     apellido_cliente = nombre_lista[1]
     conta = 0
     for i in contactos:
-        if i["nombre"]==nombre_cliente:
-            if i["apellido"] == apellido_cliente:
+        if i["FirstName"]==nombre_cliente:
+            if i["LastName"] == apellido_cliente:
                 eliminar = contactos[conta]
                 contactos.remove(eliminar)
                 
@@ -83,8 +91,8 @@ def call_id (contactos,id):
         input: recibe una lista de diccionarios y el id a llamar
         returns: nada '''
         conta=contactos[id]
-        id_per=conta ["nombre"]
-        id_num = conta ["numero"]
+        id_per=conta ["FirstName"]
+        id_num = conta ["Phone"]
         print ("calling {}...".format(id_per))
         print("numero de telefono: {}".format(id_num))
         contador =5
@@ -102,8 +110,8 @@ def mensajes_ids(contactos,ids,mensaje):
         input: recibe una lista de diccionarios, un id y un mensaje
         returns: nada '''
         id=contactos[ids]
-        id_per=id["nombre"]
-        id_num = id ["numero"]
+        id_per=id["FirstName"]
+        id_num = id ["Phone"]
         print ("enviando mensaje a: {} {}".format(id_per,id_num))
         print ("mensaje: {}".format(mensaje))
         print("")
@@ -140,7 +148,7 @@ def listar_contactos_favoritos(lista_favoritos):
                         contador = contador +1
                         print("")
                 print("press ctrl+c to exit")
-                time.sleep(44444)
+                time.sleep(444444)
         except:
                 KeyboardInterrupt
         
@@ -153,10 +161,11 @@ while menup == "si":
         print("")
         print("--------------------------------menu principal contact manager--------------------------------------------")
         print("")
-        print("1. ajustes de contactos")
-        print("2. comunicarse con algun contacto")
-        print("3. favoritos")
-        print("4. HELP")
+        print("1. Ajustes de contactos")
+        print("2. Comunicarse con algun contacto")
+        print("3. Favoritos")
+        print("4. Get-Post")
+        print("5. Help")
         print("10. exit ")
         print("")
         opcion_menu_prin = input("ingrese numero de opcion: ")
@@ -180,13 +189,10 @@ while menup == "si":
                                 apellido = input("Apellido: ")
                                 numero =int(input("Numero: "))
                                 largonumero = len(numero)
-                                if largonumero == 8:
-                                        agregar_contacto(nombre,apellido,numero)
-                                        print("contacto agregado")
-                                        time.sleep(1)
-                                else:
-                                        print("numero debe ser de 8 digitos para que el contacto se guarde")
-                                        time.sleep(3)
+                                
+                                agregar_contacto(nombre,apellido,numero)
+                                print("contacto agregado")
+                                time.sleep(1)
                         if opcion_ajustes == "2":
                                 listar_contactos(contactos)
                         if opcion_ajustes == "3":
@@ -233,7 +239,7 @@ while menup == "si":
                                         print("id no existe")
                                         time.sleep(2)
                         if opcion_cont == "3":
-                                listar_contactos
+                                listar_contactos(contactos)
                              
                         if opcion_cont == "10":
                                 menucont= "exit"
@@ -292,7 +298,7 @@ while menup == "si":
                                 eliminar_contactos (lista_favoritos,nombre)     
                         if opcion_help == "10":
                                 menufav= "exit" 
-        if opcion_menu_prin == "4" :
+        if opcion_menu_prin == "5" :
                 menu_help = "si"
                 while menu_help == "si":
                         os.system('cls')
@@ -344,6 +350,28 @@ while menup == "si":
                                 time.sleep(3)   
                         if opcion_help == "10":
                                 menu_help= "exit"                                       
+        if opcion_menu_prin == "4":
+                menupg = "si"
+                while menupg =="si":
+                        print("")
+                        print("-----------------------------------Get-Post--------------------------------------")
+                        print("")
+                        print("1. get contacts")
+                        print("2. post contacts")
+                        print("10. exit ajustes de contacto")
+                        print("")
+                        opcionpg = input("ingrese numero de opcion: ")
+                        print("")
+                        if opcionpg == "1":
+                                url = input("ingrese url para traer datos: ")
+                                get_contacts(url)
+                        if opcionpg == "2":
+                                data = contactos
+                                r = requests.post("http://demo7862839.mockable.io/contacts?gid=100", json={'json_payload': data})  
+                        if opcionpg == "10":
+                                menupg = "exit"
+
+
         if opcion_menu_prin == "10" :
                 os.system('cls')
                 print("cerrando contact manager")
