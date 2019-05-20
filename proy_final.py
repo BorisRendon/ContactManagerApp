@@ -1,15 +1,22 @@
 import requests
 import os.path,time,sys,requests
-import colorama
-from colorama import Fore,Back , Style
-from colorama import init
 contactos=[]
 def get_contacts (url):
+        '''
+        accion que realiza: agrega contactos de un url de un json
+        input: url de la pagina
+        returns: nada '''
         r = requests.get(url = url)
         data = r.json()
         for i in data:
                 contactos.append(i)
-
+def post_contactos (contactos,http_id):
+        '''
+        accion que realiza: trae datos de un pagina 
+        input: gid o http id
+        returns: nada '''
+        data = contactos
+        r = requests.post("https://crolq57jod.execute-api.us-east-1.amazonaws.com/dev//contacts?gid={}".format(http_id), json=data) 
 
 #---------------------------------------------------funcion traer .txt--------------------------------------------------------------
 def agregar_txt (path,documento):
@@ -29,7 +36,9 @@ def agregar_txt (path,documento):
 
                                                                 lista = line.split(",")
                                                                 
-                                                                new_contact= {"FirstName":lista[0],"LastName":lista[1],"Phone":lista[2]}
+                                                                new_contact= {"FirstName":lista[0],
+                                                                "LastName":lista[1],
+                                                                "Phone":lista[2]}
                                                                 contactos.append(new_contact)
                                                         except:
                                                                 IndexError 
@@ -45,7 +54,9 @@ def agregar_contacto(nombreNuevo,apellidoNuevo,numeroNuevo):
     accion que realiza: agrega un contacto a la lista
     input: recibe el nombre el apellido  y un # de telefono de 8 digitos
     returns: nada '''
-    new_contact= {"FirstName":nombreNuevo,"LastName":apellidoNuevo,"Phone":numeroNuevo}
+    new_contact= {"FirstName":nombreNuevo,
+    "LastName":apellidoNuevo,
+    "Phone":numeroNuevo}
     contactos.append(new_contact)
 #------------------------------------------------------funcion listar contactos--------------------------------------------------
 def listar_contactos(contactos):
@@ -96,16 +107,14 @@ def call_id (contactos,id):
         conta=contactos[id]
         id_per=conta ["FirstName"]
         id_num = conta ["Phone"]
-        print (Fore.LIGHTGREEN_EX +"calling {}...".format(id_per))
-        print(Fore.LIGHTGREEN_EX +"numero de telefono: {}".format(id_num))
-        print(Style.RESET_ALL)
+        print ("calling {}...".format(id_per))
+        print("numero de telefono: {}".format(id_num))
         contador =5
         try:
                 for i in range(5):
                         time.sleep(1)
-                        print(Fore.RED + "Espere en linea {} segundos restantes".format(contador))
+                        print("Espere en linea {} segundos restantes".format(contador))
                         contador =contador - 1
-                        print(Style.RESET_ALL)
         except:
                 KeyboardInterrupt
 #------------------------------------------------------funcion mensaje de textos ids--------------------------------------------------
@@ -117,11 +126,10 @@ def mensajes_ids(contactos,ids,mensaje):
         id=contactos[ids]
         id_per=id["FirstName"]
         id_num = id ["Phone"]
-        print (Fore.LIGHTGREEN_EX + "enviando mensaje a: {} {}".format(id_per,id_num))
+        print ("enviando mensaje a: {} {}".format(id_per,id_num))
         print ("mensaje: {}".format(mensaje))
         print("")
-        print(Fore.RED + "enviando mensaje...")
-        print(Style.RESET_ALL)
+        print("enviando mensaje...")
         time.sleep(2)
 #------------------------------------------------------funcion agregar a favoritos--------------------------------------------------
 lista_favoritos=[]
@@ -321,36 +329,44 @@ while menup == "si":
                         print("")
                         opcion_help = input("ingrese numero de opcion: ")
                         print("")
-                        if opcion_help == "1":
+                        if opcion_help == "0":
                                 print(agregar_txt.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "2":
+                        if opcion_help == "1":
                                 print(agregar_contacto.__doc__)
                                 time.sleep(3)
                                 print("")
-                        if opcion_help == "3":
+                        if opcion_help == "2":
                                 print(listar_contactos.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "4":
+                        if opcion_help == "3":
                                 print(eliminar_contactos.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "5":
+                        if opcion_help == "4":
                                 print(call_id.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "6":
+                        if opcion_help == "5":
                                 print(mensajes_ids.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "7":
+                        if opcion_help == "6":
                                 print(agregar_a_favo.__doc__)
                                 print("")
                                 time.sleep(3)
-                        if opcion_help == "8":
+                        if opcion_help == "7":
                                 print(listar_contactos_favoritos.__doc__)
+                                print("")
+                                time.sleep(3) 
+                        if opcion_help == "8":
+                                print(get_contacts.__doc__)
+                                print("")
+                                time.sleep(3)  
+                        if opcion_help == "9":
+                                print(post_contactos.__doc__)
                                 print("")
                                 time.sleep(3)   
                         if opcion_help == "10":
@@ -373,15 +389,13 @@ while menup == "si":
                                 get_contacts(url)
                         if opcionpg == "2":
                                 http_id = input("ingrese su id: ")
-                                data = contactos
-                                r = requests.post("https://crolq57jod.execute-api.us-east-1.amazonaws.com/dev//contacts?gid={}".format(http_id), json={'json_payload': data})  
+                                post_contactos(contactos,http_id)
                         if opcionpg == "10":
                                 menupg = "exit"
 
 
         if opcion_menu_prin == "10" :
                 os.system('cls')
-                print(Fore.LIGHTBLUE_EX + "cerrando contact manager")
+                print("cerrando contact manager")
                 time.sleep(2)
-                print(Style.RESET_ALL)
-                sys.exit(0)
+                sys.exit()
