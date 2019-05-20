@@ -1,5 +1,8 @@
 import requests
 import os.path,time,sys,requests
+import colorama
+from colorama import Fore,Back , Style
+from colorama import init
 contactos=[]
 def get_contacts (url):
         r = requests.get(url = url)
@@ -93,14 +96,16 @@ def call_id (contactos,id):
         conta=contactos[id]
         id_per=conta ["FirstName"]
         id_num = conta ["Phone"]
-        print ("calling {}...".format(id_per))
-        print("numero de telefono: {}".format(id_num))
+        print (Fore.LIGHTGREEN_EX +"calling {}...".format(id_per))
+        print(Fore.LIGHTGREEN_EX +"numero de telefono: {}".format(id_num))
+        print(Style.RESET_ALL)
         contador =5
         try:
                 for i in range(5):
                         time.sleep(1)
-                        print("Espere en linea {} segundos restantes".format(contador))
+                        print(Fore.RED + "Espere en linea {} segundos restantes".format(contador))
                         contador =contador - 1
+                        print(Style.RESET_ALL)
         except:
                 KeyboardInterrupt
 #------------------------------------------------------funcion mensaje de textos ids--------------------------------------------------
@@ -112,10 +117,11 @@ def mensajes_ids(contactos,ids,mensaje):
         id=contactos[ids]
         id_per=id["FirstName"]
         id_num = id ["Phone"]
-        print ("enviando mensaje a: {} {}".format(id_per,id_num))
+        print (Fore.LIGHTGREEN_EX + "enviando mensaje a: {} {}".format(id_per,id_num))
         print ("mensaje: {}".format(mensaje))
         print("")
-        print("enviando mensaje...")
+        print(Fore.RED + "enviando mensaje...")
+        print(Style.RESET_ALL)
         time.sleep(2)
 #------------------------------------------------------funcion agregar a favoritos--------------------------------------------------
 lista_favoritos=[]
@@ -375,6 +381,6 @@ while menup == "si":
 
         if opcion_menu_prin == "10" :
                 os.system('cls')
-                print("cerrando contact manager")
+                print(Fore.LIGHTBLUE_EX + "cerrando contact manager")
                 time.sleep(2)
                 sys.exit()
