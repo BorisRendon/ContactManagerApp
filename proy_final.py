@@ -383,4 +383,5 @@ while menup == "si":
                 os.system('cls')
                 print(Fore.LIGHTBLUE_EX + "cerrando contact manager")
                 time.sleep(2)
-                sys.exit()
+                print(Style.RESET_ALL)
+                sys.exit(0)
