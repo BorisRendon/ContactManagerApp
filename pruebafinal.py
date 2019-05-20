@@ -3,6 +3,7 @@ import request
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import urllib.request
+import urllib.parse
 
 """""fase 1"""
 
@@ -11,19 +12,9 @@ import urllib.request
 contactos=[]
 #fase 2
 url = 'http://demo7862839.mockable.io/contacts?gid=100 '
-#params por el momento no srive de nada,no sé cuales deberaian de ser los parámetros
-params = {"name": "arg1",
-          "lastname": "arg2",
-          "Phone": "arg3"
-}
-querystring = urllib.parse.urlencode(params)
-url = url + "?" + querystring
-querystring = urllib.parse.urlencode(params)
-url = url + "?" + querystring
-with urllib.request.urlopen("http://demo7862839.mockable.io/contacts?gid=100") as response:
-    response_txt = response.read()
-    
-    print(response_txt)
+f = urllib.request.urlopen(url)
+f1= f.read().decode('utf-8')
+print(f1)
 
 
 
